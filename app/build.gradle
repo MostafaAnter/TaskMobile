@@ -18,6 +18,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'BASE_URL', "\"https://tyre24.alzura.com/de/de/rest/v12/utils/\""
+        buildConfigField 'String', 'USER_NAME', "\"106901\""
+        buildConfigField 'String', 'PASSWORD', "\"MTYzYmZkNjZiZmJiMTg2M2IwNjU2Nzk5NzI5OTVjNGY=\""
     }
 
     buildFeatures {
