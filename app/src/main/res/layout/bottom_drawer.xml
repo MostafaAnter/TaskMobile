@@ -6,14 +6,21 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/bottom_navigation_container"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:behavior_hideable="false"
         app:behavior_peekHeight="?android:attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="1dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:cardCornerRadius="12dp"
+        app:cardUseCompatPadding="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="6dp"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
@@ -22,7 +29,7 @@
             app:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@color/colorTransparent"
             android:minHeight="?attr/actionBarSize">
 
             <androidx.appcompat.widget.Toolbar
@@ -51,4 +58,5 @@
                 android:paddingBottom="8dp" />
         </com.google.android.material.appbar.AppBarLayout>
     </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

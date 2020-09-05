@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="com.saitow.ui.searchBankData.HomeFragment"
+        android:name="com.saitow.ui.searchBankData.SearchBankDataFragment"
         android:label="@string/menu_search"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_validate_bic"
-        android:name="com.saitow.ui.validateBICAndIBAN.GalleryFragment"
+        android:name="com.saitow.ui.validateBICAndIBAN.ValidateBICAndIBANFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_validate_bic_and_iban" />
 
     <fragment
         android:id="@+id/nav_validate_post_code"
-        android:name="com.saitow.ui.validatePostCode.SlideshowFragment"
+        android:name="com.saitow.ui.validatePostCode.ValidatePostCodeFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_validate_post_code" />
 </navigation>
