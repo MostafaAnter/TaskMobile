@@ -68,6 +68,9 @@ dependencies {
     // dagger hilt dependencies
     implementation "com.google.dagger:hilt-android:$dagger_version"
     kapt "com.google.dagger:hilt-android-compiler:$dagger_version"
+    // dagger hilt for view model
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$dagger_viewmodel_version"
+    kapt "androidx.hilt:hilt-compiler:$dagger_viewmodel_version"
 
     // for network calls
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -75,5 +78,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    // for rx java
+    implementation "io.reactivex.rxjava2:rxandroid:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
 
 }

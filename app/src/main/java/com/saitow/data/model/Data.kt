@@ -4,7 +4,6 @@ package com.saitow.data.model
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 data class Data(
     @Json(name = "page")
     val page: Int = 0,

@@ -8,14 +8,14 @@ import javax.inject.Inject
 /**
  * Created by Mostafa Anter on 9/5/20.
  */
-class ApiHelperImpl @Inject constructor(private val apiHelper: ApiHelper): ApiHelper {
-    override fun searchForBankData(routingCode: String): Single<SearchResponse> = apiHelper.searchForBankData(routingCode)
+class ApiHelperImpl @Inject constructor(private val apiService: ApiService): ApiHelper {
+    override fun searchForBankData(routingCode: String): Single<SearchResponse> = apiService.searchForBankData(routingCode)
 
-    override fun validateBIC(bicToValidate: String): Single<ValidationResponse> = apiHelper.validateBIC(bicToValidate)
+    override fun validateBIC(bicToValidate: String): Single<ValidationResponse> = apiService.validateBIC(bicToValidate)
 
-    override fun validateIBAN(iban: String): Single<ValidationResponse> = apiHelper.validateIBAN(iban)
+    override fun validateIBAN(iban: String): Single<ValidationResponse> = apiService.validateIBAN(iban)
 
     override fun validatePostCode(
         countryCode: String,
-        postCode: String): Single<ValidationResponse> = apiHelper.validatePostCode(countryCode, postCode)
+        postCode: String): Single<ValidationResponse> = apiService.validatePostCode(countryCode, postCode)
 }

@@ -13,22 +13,29 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.saitow.R
 import com.saitow.utils.RecyclerViewScrollListener
-import java.util.*
+import com.task.utils.Status
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A simple [Fragment] subclass.
  */
+@AndroidEntryPoint
 class SearchBankDataFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var swipeRefreshRecyclerList: SwipeRefreshLayout? = null
     private var mAdapter: SearchBankDataAdapter? = null
     private var scrollListener: RecyclerViewScrollListener? = null
     private val modelList = ArrayList<AbstractModel>()
+
+    //for view model
+    private val searchBankDataViewModel : SearchBankDataViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +54,9 @@ class SearchBankDataFragment : Fragment() {
                     false
             }, 5000)
         }
+
+        setupObserver()
+        searchBankDataViewModel.doSearch("")
     }
 
     private fun findViews(view: View) {
@@ -150,4 +160,27 @@ class SearchBankDataFragment : Fragment() {
             }
         })
     }
+
+    // region observe data coming from server
+    private fun setupObserver() {
+        searchBankDataViewModel.response.observe(requireActivity(), {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    Toast.makeText(requireActivity(), it.data?.code, Toast.LENGTH_LONG).show()
+//                    progressBar.visibility = View.GONE
+//                    it.data?.let { users -> renderList(users) }
+//                    recyclerView.visibility = View.VISIBLE
+                }
+                Status.LOADING -> {
+//                    progressBar.visibility = View.VISIBLE
+//                    recyclerView.visibility = View.GONE
+                }
+                Status.ERROR -> {
+                    //progressBar.visibility = View.GONE
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+    }
+    //endregion
 }

@@ -15,9 +15,10 @@ import com.saitow.R
 import com.saitow.data.model.BottomSheetItem
 import com.saitow.databinding.ActivityMainBinding
 import com.saitow.ui.bottomDrawer.BottomDrawerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     // for navigation

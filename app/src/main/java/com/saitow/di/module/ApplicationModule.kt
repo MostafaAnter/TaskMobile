@@ -8,12 +8,15 @@ import com.saitow.data.api.BasicAuthInterceptor
 import com.saitow.di.BaseUrl
 import com.saitow.di.Password
 import com.saitow.di.UserName
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
@@ -44,12 +47,17 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, @BaseUrl BASE_URL: String): Retrofit =
+    fun provideRetrofit(okHttpClient: OkHttpClient, @BaseUrl BASE_URL: String, factory: Converter.Factory): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(factory)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .build()
+
+    @Provides
+    @Singleton
+    fun provideConverterFactory(): Converter.Factory = MoshiConverterFactory.create()
 
     @Provides
     @Singleton
