@@ -1,5 +1,6 @@
 package com.saitow.di.module
 
+import com.google.gson.GsonBuilder
 import com.saitow.BuildConfig
 import com.saitow.data.api.ApiHelper
 import com.saitow.data.api.ApiHelperImpl
@@ -8,17 +9,18 @@ import com.saitow.data.api.BasicAuthInterceptor
 import com.saitow.di.BaseUrl
 import com.saitow.di.Password
 import com.saitow.di.UserName
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import okhttp3.OkHttpClient
+import okhttp3.*
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
 
 /**
  * Created by Mostafa Anter on 9/5/20.
@@ -40,14 +42,25 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(basicAuthInterceptor: BasicAuthInterceptor) = OkHttpClient
+    fun provideOkHttpClient(basicAuthInterceptor: BasicAuthInterceptor) = if (BuildConfig.DEBUG) {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addNetworkInterceptor(basicAuthInterceptor)
+            .build()
+    } else OkHttpClient
         .Builder()
-        .addInterceptor(basicAuthInterceptor)
+        .addNetworkInterceptor(basicAuthInterceptor)
         .build()
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, @BaseUrl BASE_URL: String, factory: Converter.Factory): Retrofit =
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        @BaseUrl BASE_URL: String,
+        factory: Converter.Factory
+    ): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(factory)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -57,7 +70,12 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideConverterFactory(): Converter.Factory = MoshiConverterFactory.create()
+    fun provideConverterFactory(): Converter.Factory = GsonConverterFactory.create(
+        GsonBuilder()
+            .setLenient()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+            .create()
+    )
 
     @Provides
     @Singleton

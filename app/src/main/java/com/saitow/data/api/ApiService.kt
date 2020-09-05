@@ -12,19 +12,19 @@ import retrofit2.http.Query
  */
 interface ApiService {
     // Search for Bank Data
-    @GET("/searchBic")
+    @GET("/de/de/rest/v12/utils/searchBic")
     fun searchForBankData(@Query("blz") routingCode: String): Single<SearchResponse>
 
     // Validate BIC
-    @GET("/validateBic")
+    @GET("/de/de/rest/v12/utils/validateBic")
     fun validateBIC(@Query("bic") bicToValidate: String): Single<ValidationResponse>
 
     // Validate IBAN
-    @GET("/validateIban")
+    @GET("/de/de/rest/v12/utils/validateIban")
     fun validateIBAN(@Query("iban") iban: String): Single<ValidationResponse>
 
 
     // Search for Bank Data
-    @GET("/validatePostCode")
+    @GET("/de/de/rest/v12/utils/validatePostCode")
     fun validatePostCode(@Query("countryCode") countryCode: String, @Query("postCode") postCode: String): Single<ValidationResponse>
 }

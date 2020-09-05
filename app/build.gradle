@@ -18,9 +18,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String', 'BASE_URL', "\"https://tyre24.alzura.com/de/de/rest/v12/utils/\""
+        buildConfigField 'String', 'BASE_URL', "\"https://tyre24.alzura.com/\""
         buildConfigField 'String', 'USER_NAME', "\"106901\""
-        buildConfigField 'String', 'PASSWORD', "\"MTYzYmZkNjZiZmJiMTg2M2IwNjU2Nzk5NzI5OTVjNGY=\""
+        buildConfigField 'String', 'PASSWORD', "\"NjQ3ZTFlMzY2Nzk1MDUwMzY1M2ExMTMwMzc0Y2YzOGY=\""
     }
 
     buildFeatures {
@@ -75,7 +75,7 @@ dependencies {
     // for network calls
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 

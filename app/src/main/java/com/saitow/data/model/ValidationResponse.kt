@@ -1,13 +1,11 @@
 package com.saitow.data.model
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-@JsonClass(generateAdapter = true)
 data class ValidationResponse(
-    @Json(name = "code")
+    @SerializedName("code")
     val code: String = "",
-    @Json(name = "data")
+    @SerializedName("data")
     val `data`: ValidationData = ValidationData()
 )

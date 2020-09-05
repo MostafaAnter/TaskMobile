@@ -1,24 +1,23 @@
 package com.saitow.data.model
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
 data class Bic(
-    @Json(name = "id")
+    @SerializedName("id")
     val id: String = "",
-    @Json(name = "countryId")
+    @SerializedName("countryId")
     val countryId: String = "",
-    @Json(name = "bankName")
+    @SerializedName("bankName")
     val bankName: String = "",
-    @Json(name = "location")
+    @SerializedName("location")
     val location: String = "",
-    @Json(name = "blz")
+    @SerializedName("blz")
     val blz: String = "",
-    @Json(name = "bicCode")
+    @SerializedName("bicCode")
     val bicCode: String = "",
-    @Json(name = "bicCodeOther")
-    val bicCodeOther: List<String> = listOf(),
-    @Json(name = "countryCode")
+    @SerializedName("bicCodeOther")
+    val bicCodeOther: List<Any> = listOf(),
+    @SerializedName("countryCode")
     val countryCode: String = ""
 )
