@@ -82,12 +82,15 @@ class MainActivity : AppCompatActivity() {
                 when(position){
                     0->{
                         navController.navigate(R.id.nav_search)
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
                     }
                     1->{
                         navController.navigate(R.id.nav_validate_bic)
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
                     }
                     2->{
                         navController.navigate(R.id.nav_validate_post_code)
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
                     }
                 }
 

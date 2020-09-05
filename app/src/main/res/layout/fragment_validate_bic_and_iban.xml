@@ -87,6 +87,7 @@
                 android:layout_marginEnd="@dimen/fab_margin"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"
+                android:layout_marginBottom="?android:attr/actionBarSize"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
