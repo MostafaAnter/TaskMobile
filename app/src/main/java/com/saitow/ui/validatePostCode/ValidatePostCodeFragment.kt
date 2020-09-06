@@ -10,7 +10,9 @@ import androidx.fragment.app.FragmentManager
 import com.saitow.R
 import com.saitow.databinding.FragmentValidatePostCodeBinding
 import com.saitow.ui.selectCountryDialog.SelectCountryFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ValidatePostCodeFragment : Fragment() {
 
     // for data binding

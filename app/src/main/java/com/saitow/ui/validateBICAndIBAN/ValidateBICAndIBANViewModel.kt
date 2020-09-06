@@ -1,6 +1,5 @@
 package com.saitow.ui.validateBICAndIBAN
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +10,7 @@ import com.saitow.utils.NetworkHelper
 import com.task.utils.Resource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 /**
@@ -20,6 +20,9 @@ class ValidateBICAndIBANViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
     private val networkHelper: NetworkHelper
 ) : ViewModel() {
+
+    private val compositeDisposable = CompositeDisposable()
+    private var disposable: Disposable? = null
 
     private val _responseBIC = MutableLiveData<Resource<ValidationResponse>>()
     private val _responseIBAN = MutableLiveData<Resource<ValidationResponse>>()
@@ -32,16 +35,21 @@ class ValidateBICAndIBANViewModel @ViewModelInject constructor(
     fun validateBIC(bicToValidate: String) {
         _responseBIC.postValue(Resource.loading(null))
         if (networkHelper.isNetworkConnected()) {
-            val compositeDisposable = CompositeDisposable()
-            val observer = mainRepository.validateBIC(bicToValidate)
+            //clear previous request
+            if (disposable != null){
+                compositeDisposable.remove(disposable!!)
+                disposable?.dispose()
+                disposable = null
+            }
+            disposable = mainRepository.validateBIC(bicToValidate)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-            val disposable = observer.subscribe({
+                .subscribe({
                 _responseBIC.postValue(Resource.success(it))
             }, {
                 _responseBIC.postValue(Resource.error(it.toString(), null))
             })
-            compositeDisposable.add(disposable)
+            compositeDisposable.add(disposable!!)
 
         } else _responseBIC.postValue(Resource.error("No internet connection", null))
     }
@@ -49,16 +57,22 @@ class ValidateBICAndIBANViewModel @ViewModelInject constructor(
     fun validateIBAN(iban: String) {
         _responseIBAN.postValue(Resource.loading(null))
         if (networkHelper.isNetworkConnected()) {
+            //clear previous request
+            if (disposable != null){
+                compositeDisposable.remove(disposable!!)
+                disposable?.dispose()
+                disposable = null
+            }
             val compositeDisposable = CompositeDisposable()
-            val observer = mainRepository.validateIBAN(iban)
+            disposable = mainRepository.validateIBAN(iban)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-            val disposable = observer.subscribe({
+                .subscribe({
                 _responseIBAN.postValue(Resource.success(it))
             }, {
                 _responseIBAN.postValue(Resource.error(it.toString(), null))
             })
-            compositeDisposable.add(disposable)
+            compositeDisposable.add(disposable!!)
 
         } else _responseIBAN.postValue(Resource.error("No internet connection", null))
     }

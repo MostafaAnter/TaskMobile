@@ -74,6 +74,7 @@ class SelectCountryFragment : DialogFragment() {
     //region get countries
     private fun setSearchView() {
         binding.searchView.setOnClickListener { v: View? -> binding.searchView.isIconified = false }
+        binding.searchView.setQueryHint("Enter Country name ...")
         binding.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 val filterList: ArrayList<Country> = ArrayList<Country>()

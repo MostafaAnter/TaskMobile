@@ -28,6 +28,7 @@
                 android:hint="Select Country ..."
                 android:paddingLeft="6dp"
                 android:textSize="14sp"
+                android:iconifiedByDefault="false"
                 tools:ignore="Autofill,RtlHardcoded,RtlSymmetry,TextFields" />
         </LinearLayout>
 
