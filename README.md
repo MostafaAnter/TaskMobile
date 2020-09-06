@@ -23,7 +23,9 @@ ___________
  
 ____________
 ### Techinecal Architecture
-* Model-View-ViewModel (ie MVVM)
+* Model-View-ViewModel (ie MVVM) project will look like below:
+<img src="https://raw.githubusercontent.com/MostafaAnter/TaskMobile/master/Screen%20Shot%202020-09-06%20at%203.21.57%20PM.png
+" width="300">
 
 **Why Promoting MVVM VS MVP:**
 
