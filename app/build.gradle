@@ -83,4 +83,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava_version"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
 
+    // event bus for send data between objects
+    implementation "org.greenrobot:eventbus:$eventbus_version"
+
 }

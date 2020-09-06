@@ -65,3 +65,12 @@
 # OkHttp platform used only on JVM and when Conscrypt dependency is available.
 -dontwarn okhttp3.internal.platform.ConscryptPlatform
 #-------------- Okhttp -------------------
+#-------------- Event bus -------------------
+
+-keepattributes *Annotation*
+  -keepclassmembers class * {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+   }
+  -keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+#-------------- Event bus -------------------

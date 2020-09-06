@@ -11,11 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.saitow.R
+import com.saitow.data.model.Country
 import com.saitow.data.model.ValidationResponse
 import com.saitow.databinding.FragmentValidatePostCodeBinding
 import com.saitow.ui.selectCountryDialog.SelectCountryFragment
 import com.task.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
 
 @AndroidEntryPoint
 class ValidatePostCodeFragment : Fragment() {
@@ -55,7 +60,12 @@ class ValidatePostCodeFragment : Fragment() {
         binding.dataItem = ValidationResponse()
         binding.executePendingBindings()
         binding.validatePostCodeTitle.text = "VALIDATE POST CODE"
-        binding.validatePostCodeTitle.setTextColor(ContextCompat.getColor(requireActivity(), R.color.colorAccent))
+        binding.validatePostCodeTitle.setTextColor(
+            ContextCompat.getColor(
+                requireActivity(),
+                R.color.colorAccent
+            )
+        )
 
         // listen for different actions
         hideSwipe()
@@ -83,11 +93,12 @@ class ValidatePostCodeFragment : Fragment() {
     private fun setSearchView() {
         binding.searchView.setOnClickListener { v: View? -> binding.searchView.isIconified = false }
         binding.searchView.setQueryHint("Enter Post Code ...")
-        binding.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object :
+            android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (query.length > 0 && isCountrySelected) {
                     validatePostCodeViewModel.validatePostCode(countryCode, query)
-                }else{
+                } else {
                     Toast.makeText(requireActivity(), "Select Country", Toast.LENGTH_SHORT).show()
                 }
                 return false
@@ -105,7 +116,10 @@ class ValidatePostCodeFragment : Fragment() {
     private fun setValidateButtonClick(){
         binding.validatePostCodeButton.setOnClickListener {
             if (binding.searchView.query.isNotEmpty() && isCountrySelected){
-                validatePostCodeViewModel.validatePostCode(countryCode, binding.searchView.query.toString())
+                validatePostCodeViewModel.validatePostCode(
+                    countryCode,
+                    binding.searchView.query.toString()
+                )
             }else{
                 Toast.makeText(requireActivity(), "Select Country", Toast.LENGTH_SHORT).show()
             }
@@ -132,6 +146,23 @@ class ValidatePostCodeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: Country) { /* Do something */
+        isCountrySelected = true
+        countryCode = event.code
+        binding.selectCountry.text = event.name
     }
 
 }

@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.saitow.R
 import com.saitow.data.model.Country
 import com.saitow.databinding.DialogCountryBinding
+import org.greenrobot.eventbus.EventBus
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.IOException
 import java.nio.charset.Charset
+
 
 /**
  * A simple [Fragment] subclass.
@@ -64,7 +66,7 @@ class SelectCountryFragment : DialogFragment() {
         binding.recyclerView.adapter = mAdapter
         mAdapter!!.SetOnItemClickListener(object : SelectCountryAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, position: Int, model: Country?) {
-                Toast.makeText(requireActivity(), model?.name, Toast.LENGTH_SHORT).show()
+                EventBus.getDefault().post(model)
                 dismiss()
             }
 
@@ -75,7 +77,8 @@ class SelectCountryFragment : DialogFragment() {
     private fun setSearchView() {
         binding.searchView.setOnClickListener { v: View? -> binding.searchView.isIconified = false }
         binding.searchView.setQueryHint("Enter Country name ...")
-        binding.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object :
+            android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 val filterList: ArrayList<Country> = ArrayList<Country>()
                 if (query.length > 0) {
