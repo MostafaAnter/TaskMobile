@@ -40,6 +40,7 @@ ______________
 * **Groovy** define all dependencies version in on place so we can update it easly. and of course define cretical string data inside gradle file
 * **dataBinding** that allows you to bind UI components in your layouts to data sources in your app using a declarative format rather than programmatically.
 * **Dagger Hilt** dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in my project.
+* **Android jetpack Navigation** implement single activity app, Navigation refers to the interactions that allow users to navigate across, into, and back out from the different pieces of content within my app. 
 * **Android jetpack Viewmodel** class is designed to store and manage UI-related data in a lifecycle conscious way.
 * **Android jetpack LiveData** is an observable data holder class. Unlike a regular observable, LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities
 * **Retrofit** for network operations.
