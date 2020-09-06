@@ -38,10 +38,8 @@ class ValidateBICAndIBANViewModel @ViewModelInject constructor(
                 .subscribeOn(Schedulers.newThread())
             val disposable = observer.subscribe({
                 _responseBIC.postValue(Resource.success(it))
-                Log.d("response done", it.data.bic)
             }, {
                 _responseBIC.postValue(Resource.error(it.toString(), null))
-                Log.d("response failed", it.toString())
             })
             compositeDisposable.add(disposable)
 
@@ -57,10 +55,8 @@ class ValidateBICAndIBANViewModel @ViewModelInject constructor(
                 .subscribeOn(Schedulers.newThread())
             val disposable = observer.subscribe({
                 _responseIBAN.postValue(Resource.success(it))
-                Log.d("response done", it.data.bic)
             }, {
                 _responseIBAN.postValue(Resource.error(it.toString(), null))
-                Log.d("response failed", it.toString())
             })
             compositeDisposable.add(disposable)
 

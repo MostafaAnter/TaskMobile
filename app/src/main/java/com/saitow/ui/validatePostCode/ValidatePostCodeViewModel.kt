@@ -35,10 +35,8 @@ class ValidatePostCodeViewModel @ViewModelInject constructor(
                 .subscribeOn(Schedulers.newThread())
             val disposable = observer.subscribe({
                 _responsePostCode.postValue(Resource.success(it))
-                Log.d("response done", it.data.bic)
             }, {
                 _responsePostCode.postValue(Resource.error(it.toString(), null))
-                Log.d("response failed", it.toString())
             })
             compositeDisposable.add(disposable)
 

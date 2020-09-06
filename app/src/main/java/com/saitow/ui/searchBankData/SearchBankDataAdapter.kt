@@ -4,10 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.saitow.R
+import com.saitow.data.model.Bic
+import com.saitow.databinding.ItemBankDataListBinding
 import java.util.*
 
 /**
@@ -15,18 +16,17 @@ import java.util.*
  */
 class SearchBankDataAdapter(
     private val mContext: Context,
-    private var modelList: ArrayList<AbstractModel>
+    private var modelList: ArrayList<Bic>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mItemClickListener: OnItemClickListener? = null
-    fun updateList(modelList: ArrayList<AbstractModel>) {
+    fun updateList(modelList: ArrayList<Bic>) {
         this.modelList = modelList
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_bank_data_list, viewGroup, false)
-        return ViewHolder(view)
+        val binding: ItemBankDataListBinding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), R.layout.item_bank_data_list, viewGroup, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -35,8 +35,7 @@ class SearchBankDataAdapter(
         if (holder is ViewHolder) {
             val model = getItem(position)
             val genericViewHolder = holder
-            genericViewHolder.itemTxtTitle.text = model.title
-            genericViewHolder.itemTxtMessage.text = model.message
+            holder.bind(model)
         }
     }
 
@@ -48,30 +47,29 @@ class SearchBankDataAdapter(
         this.mItemClickListener = mItemClickListener
     }
 
-    private fun getItem(position: Int): AbstractModel {
+    private fun getItem(position: Int): Bic {
         return modelList[position]
     }
 
     interface OnItemClickListener {
-        fun onItemClick(view: View?, position: Int, model: AbstractModel?)
+        fun onItemClick(view: View?, position: Int, model: Bic?)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imgUser: ImageView
-        val itemTxtTitle: TextView
-        val itemTxtMessage: TextView
-
+    inner class ViewHolder(private val binding: ItemBankDataListBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
-            imgUser = itemView.findViewById<View>(R.id.img_user) as ImageView
-            itemTxtTitle = itemView.findViewById<View>(R.id.item_txt_title) as TextView
-            itemTxtMessage = itemView.findViewById<View>(R.id.item_txt_message) as TextView
-            itemView.setOnClickListener {
+
+            binding.root.setOnClickListener {
                 mItemClickListener!!.onItemClick(
-                    itemView,
+                    binding.root,
                     adapterPosition,
                     modelList[adapterPosition]
                 )
             }
+        }
+
+        fun bind(model: Bic){
+            binding.dataItem = model
+            binding.executePendingBindings()
         }
     }
 }

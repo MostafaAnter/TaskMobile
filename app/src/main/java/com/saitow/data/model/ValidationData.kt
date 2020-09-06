@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class ValidationData(
     @SerializedName("bic", alternate= ["iban", "postCode"])
-    val bic: String = ""
+    val text: String = ""
 )

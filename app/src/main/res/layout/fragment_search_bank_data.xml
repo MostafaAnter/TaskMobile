@@ -1,95 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipe_refresh_recycler_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <data>
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_recycler_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/fab_margin"
-                android:layout_marginTop="@dimen/fab_margin"
-                android:layout_marginEnd="@dimen/fab_margin"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:orientation="horizontal"
-                app:cardUseCompatPadding="true">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:layout_marginStart="@dimen/fab_margin"
+                    android:layout_marginTop="@dimen/fab_margin"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    app:cardUseCompatPadding="true">
 
-                    <TextView
-                        style="@style/TextAppearance.AppCompat.Title"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:gravity="bottom"
-                        android:padding="5dp"
-                        android:paddingStart="@dimen/fab_margin"
-                        android:paddingEnd="@dimen/fab_margin"
-                        android:text="FIND BANK DATA"
-                        android:textColor="@color/colorAccent" />
-
-                    <EditText
-                        style="@style/TextAppearance.AppCompat.Subhead"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="@color/colorTransparent"
-                        android:hint="Enter bank routing code ..."
-                        android:paddingStart="@dimen/fab_margin"
-                        android:paddingEnd="@dimen/fab_margin" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/fab_margin"
-                        android:layout_marginTop="@dimen/fab_margin"
-                        android:layout_marginEnd="@dimen/fab_margin"
-                        android:layout_marginBottom="@dimen/fab_margin"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:orientation="horizontal"
-                        app:cardBackgroundColor="@color/colorAccent"
-                        app:cardUseCompatPadding="true">
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
 
-                        <Button
+                        <TextView
+                            style="@style/TextAppearance.AppCompat.Title"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="bottom"
+                            android:padding="5dp"
+                            android:paddingStart="@dimen/fab_margin"
+                            android:paddingEnd="@dimen/fab_margin"
+                            android:text="FIND BANK DATA"
+                            android:textColor="@color/colorAccent" />
+
+                        <SearchView
+                            android:id="@+id/search_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center"
+                            app:defaultQueryHint="Enter bank routing code ..."
+                            app:queryHint="Enter bank routing code ..."
+                            android:iconifiedByDefault="false"
+                            android:textSize="14sp"
+                            tools:ignore="Autofill,RtlHardcoded,RtlSymmetry,TextFields" />
+
+
+                        <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:background="@color/colorTransparent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/fab_margin"
+                            android:layout_marginTop="@dimen/fab_margin"
+                            android:layout_marginEnd="@dimen/fab_margin"
+                            android:layout_marginBottom="@dimen/fab_margin"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:src="@drawable/ic_baseline_search_24"
-                            android:text="Search"
-                            android:textColor="@color/colorWhite" />
-                    </androidx.cardview.widget.CardView>
+                            android:orientation="horizontal"
+                            app:cardBackgroundColor="@color/colorAccent"
+                            app:cardUseCompatPadding="true">
 
-                </LinearLayout>
+                            <Button
+                                android:id="@+id/search_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:background="@color/colorTransparent"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:src="@drawable/ic_baseline_search_24"
+                                android:text="Search"
+                                android:textColor="@color/colorWhite" />
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
 
 
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                android:paddingBottom="?android:attr/actionBarSize"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="?android:attr/actionBarSize"
+                    android:scrollbars="vertical" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>
 
 

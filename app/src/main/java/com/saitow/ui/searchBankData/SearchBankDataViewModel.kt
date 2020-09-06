@@ -11,6 +11,7 @@ import com.saitow.utils.NetworkHelper
 import com.task.utils.Resource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 /**
@@ -20,6 +21,9 @@ class SearchBankDataViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
     private val networkHelper: NetworkHelper) : ViewModel() {
 
+    private val compositeDisposable = CompositeDisposable()
+    private var disposable: Disposable? = null
+
     private val _response = MutableLiveData<Resource<SearchResponse>>()
 
     val response: LiveData<Resource<SearchResponse>>
@@ -28,18 +32,23 @@ class SearchBankDataViewModel @ViewModelInject constructor(
     fun doSearch(routingCode: String) {
         _response.postValue(Resource.loading(null))
         if (networkHelper.isNetworkConnected()) {
-            val compositeDisposable = CompositeDisposable()
-            val observer = mainRepository.searchForBankData(routingCode)
+            //clear previous request
+            if (disposable != null){
+                compositeDisposable.remove(disposable!!)
+                disposable?.dispose()
+                disposable = null
+            }
+            disposable = mainRepository.searchForBankData(routingCode)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-            val disposable = observer.subscribe({
+                .subscribe({
                 _response.postValue(Resource.success(it))
                 Log.d("response done", it.data.bic)
             }, {
                 _response.postValue(Resource.error(it.toString(), null))
                 Log.d("response failed", it.toString())
             })
-            compositeDisposable.add(disposable)
+            compositeDisposable.add(disposable!!)
 
         } else _response.postValue(Resource.error("No internet connection", null))
     }
