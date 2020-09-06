@@ -62,6 +62,14 @@
                             android:textSize="14sp"
                             tools:ignore="Autofill,RtlHardcoded,RtlSymmetry,TextFields" />
 
+                        <TextView
+                            android:id="@+id/validation_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="@dimen/fab_margin"
+                            android:paddingLeft="@dimen/fab_margin"
+                            android:text=""/>
+
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"

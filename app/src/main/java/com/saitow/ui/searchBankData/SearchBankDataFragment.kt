@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.saitow.R
 import com.saitow.data.model.Bic
 import com.saitow.databinding.FragmentSearchBankDataBinding
+import com.saitow.utils.InputValidation
 import com.saitow.utils.RecyclerViewScrollListener
 import com.task.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
@@ -99,6 +101,13 @@ class SearchBankDataFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 if (newText.length > 0) {
                     searchBankDataViewModel.doSearch(newText)
+                    if (InputValidation.isValidBankRoutingCode(newText)){
+                        binding.validationText.text = "Valid routing code format"
+                        binding.validationText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.colorValid))
+                    }else{
+                        binding.validationText.text = "Not Valid routing code format"
+                        binding.validationText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.colorNotValid))
+                    }
                 }
                 return true
             }

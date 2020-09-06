@@ -68,6 +68,14 @@
                             app:queryHint="Enter bank routing code ..."
                             tools:ignore="Autofill,RtlHardcoded,RtlSymmetry,TextFields" />
 
+                        <TextView
+                            android:id="@+id/validation_text_bic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="@dimen/fab_margin"
+                            android:paddingLeft="@dimen/fab_margin"
+                            android:text=""/>
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -135,6 +143,14 @@
                             app:defaultQueryHint="Enter bank routing code ..."
                             app:queryHint="Enter bank routing code ..."
                             tools:ignore="Autofill,RtlHardcoded,RtlSymmetry,TextFields" />
+
+                        <TextView
+                            android:id="@+id/validation_text_iban"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="@dimen/fab_margin"
+                            android:paddingLeft="@dimen/fab_margin"
+                            android:text=""/>
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"

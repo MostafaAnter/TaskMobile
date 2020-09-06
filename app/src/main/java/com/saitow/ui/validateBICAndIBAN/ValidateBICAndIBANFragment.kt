@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import com.saitow.R
 import com.saitow.data.model.ValidationResponse
 import com.saitow.databinding.FragmentValidateBicAndIbanBinding
+import com.saitow.utils.InputValidation
 import com.task.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -82,6 +83,13 @@ class ValidateBICAndIBANFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 if (newText.length > 0) {
                     validateBICAndIBANViewModel.validateBIC(newText)
+                    if (InputValidation.isValidBIC(newText)){
+                        binding.validationTextBic.text = "Valid BIC code format"
+                        binding.validationTextBic.setTextColor(ContextCompat.getColor(requireActivity(), R.color.colorValid))
+                    }else{
+                        binding.validationTextBic.text = "Not Valid BIC code format"
+                        binding.validationTextBic.setTextColor(ContextCompat.getColor(requireActivity(), R.color.colorNotValid))
+                    }
                 }
                 return true
             }
@@ -90,7 +98,7 @@ class ValidateBICAndIBANFragment : Fragment() {
 
     private fun setSearchViewIban() {
         binding.searchViewIban.setOnClickListener { v: View? -> binding.searchViewIban.isIconified = false }
-        binding.searchViewIban.setQueryHint("Enter IBAN ...")
+        binding.searchViewIban.setQueryHint("Enter IBAN (---- ---- ---- --)")
         binding.searchViewIban.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (query.length > 0) {
@@ -101,6 +109,13 @@ class ValidateBICAndIBANFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 if (newText.length > 0) {
+                    if (InputValidation.isValidIBAN(newText)){
+                        binding.validationTextIban.text = "Valid IBAN format"
+                        binding.validationTextIban.setTextColor(ContextCompat.getColor(requireActivity(), R.color.colorValid))
+                    }else{
+                        binding.validationTextIban.text = "Not Valid IBAN format"
+                        binding.validationTextIban.setTextColor(ContextCompat.getColor(requireActivity(), R.color.colorNotValid))
+                    }
 
                 }
                 return true
