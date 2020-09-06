@@ -36,20 +36,27 @@ ViewModel doesn't have a reference for View, on the other hand Presenter still h
 
 ViewModel survive configuration changes, while it is your own responsiblities to survive the configuration changes in case of Presenter. (Saving and restoring the UI state)
 
--
+______________
 ### Technolgy stack
 * **Progaurd** to shrink resource and obfsicate code to get smallest apk.
-* **Groovy** define all dependencies version in on place so we can update it easly.
+* **Groovy** define all dependencies version in on place so we can update it easly. and of course define cretical string data inside gradle file
 * **dataBinding** that allows you to bind UI components in your layouts to data sources in your app using a declarative format rather than programmatically.
-* **Dagger Hilt** for implement DI concept
+* **Dagger Hilt** dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in my project.
+* **Android jetpack Viewmodel** class is designed to store and manage UI-related data in a lifecycle conscious way.
+* **Android jetpack LiveData** is an observable data holder class. Unlike a regular observable, LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities
+* **Retrofit** for network operations.
+* **RXJava** for using reactive programming to enhance network methods such as manage disposables Object by insert it inside compositDisposable
+* **EventBus** simplifies the communication between components i used it to transfere data from country selectionDialog to Validate Post Code Fragment.
+* **Junit** to implement test cases for improve Validation class that used in validate bank routing code, BIC and IBAN
  
--
+______________
 
 ###  Step of emplementation:
 1. Test API by using Postman
-2. proguard
-3. 
+2. start structing project folders and add dependencies in gradle file
+3. after that i decid to start to implement ui layer based on dummy data
+4. then implement data layer 
 
--
+_______________
 
 
