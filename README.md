@@ -52,10 +52,10 @@ ______________
 ______________
 
 ###  Step of emplementation:
-1. Test API by using Postman
 2. start structing project folders and add dependencies in gradle file
-3. after that i decid to start to implement ui layer based on dummy data
-4. then implement data layer 
+3. after that i decid to start to implement ui layer based on dummy data and implementing matirial design guide line
+4. then implement data layer start with test API by using Postman
+5. make some validation test 
 
 _______________
 
