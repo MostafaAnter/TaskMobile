@@ -1,8 +1,10 @@
 package com.saitow.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -51,6 +53,16 @@ class MainActivity : AppCompatActivity() {
         // toggle bottom drawer when click on toolbar
         binding.bottomDrawer.toolbar.setOnClickListener {
             toggleBottomSheet()
+        }
+
+        binding.bottomDrawer.toggleTheme.setOnClickListener {
+            val isNightTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+            when (isNightTheme) {
+                Configuration.UI_MODE_NIGHT_YES ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                Configuration.UI_MODE_NIGHT_NO ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
         }
 
     }

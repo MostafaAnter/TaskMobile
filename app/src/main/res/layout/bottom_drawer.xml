@@ -48,6 +48,15 @@
                     android:src="@drawable/ic_baseline_menu_24"
                     android:contentDescription="@null"
                     android:layout_margin="@dimen/fab_margin"/>
+                <ImageView
+                    android:id="@+id/toggle_theme"
+                    android:gravity="end"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_color_lens_24"
+                    android:contentDescription="@null"
+                    android:layout_margin="@dimen/fab_margin"/>
             </androidx.appcompat.widget.Toolbar>
 
             <androidx.recyclerview.widget.RecyclerView
