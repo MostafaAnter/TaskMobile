@@ -11,7 +11,7 @@ As a user, I want to navigate throwgh app features so I'm click on bottom naviga
 
 When select Search bank service you will find search field so you can enter Bank routing conde and if it valid code you will get a result. in fact other services work with same manner.
 
--
+___________
 ### Support Matireal Design (DARK-Light) Themes
 <img src="https://raw.githubusercontent.com/MostafaAnter/TaskMobile/master/device-2020-09-06-141107.png" width="300"> <img src="https://raw.githubusercontent.com/MostafaAnter/TaskMobile/master/device-2020-09-06-141123.png" width="300"> <img src="https://raw.githubusercontent.com/MostafaAnter/TaskMobile/master/device-2020-09-06-141202.png" width="300">
 
@@ -20,7 +20,7 @@ When select Search bank service you will find search field so you can enter Bank
 
 
  
--
+____________
 ### Techinecal Architecture
 * Model-View-ViewModel (ie MVVM)
 
