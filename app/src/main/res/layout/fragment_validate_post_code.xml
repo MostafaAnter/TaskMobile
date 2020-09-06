@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="dataItem"
+            type="com.saitow.data.model.ValidationResponse" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -39,6 +42,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/validate_post_code_title"
                             style="@style/TextAppearance.AppCompat.Title"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
@@ -46,8 +50,9 @@
                             android:padding="5dp"
                             android:paddingStart="@dimen/fab_margin"
                             android:paddingEnd="@dimen/fab_margin"
-                            android:text="VALIDATE POST CODE"
-                            android:textColor="@color/colorAccent" />
+                            android:text="@{dataItem.code.equalsIgnoreCase(`OK`)? `Valid Post Code ;)` : `Not Valid Post Code :(`}"
+                            android:textColor="@{dataItem.code.equalsIgnoreCase(`OK`)? @color/colorValid : @color/colorNotValid}" />
+
 
                         <TextView
                             android:id="@+id/select_country"
@@ -59,14 +64,14 @@
                             android:paddingStart="@dimen/fab_margin"
                             android:paddingEnd="@dimen/fab_margin" />
 
-                        <EditText
-                            style="@style/TextAppearance.AppCompat.Subhead"
+                        <SearchView
+                            android:id="@+id/search_view"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@color/colorTransparent"
-                            android:hint="Enter post code ..."
-                            android:paddingStart="@dimen/fab_margin"
-                            android:paddingEnd="@dimen/fab_margin" />
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center"
+                            android:iconifiedByDefault="false"
+                            android:textSize="14sp"
+                            tools:ignore="Autofill,RtlHardcoded,RtlSymmetry,TextFields" />
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
@@ -81,6 +86,7 @@
                             app:cardUseCompatPadding="true">
 
                             <Button
+                                android:id="@+id/validate_post_code_button"
                                 android:layout_width="wrap_content"
                                 android:layout_height="35dp"
                                 android:background="@color/colorTransparent"
